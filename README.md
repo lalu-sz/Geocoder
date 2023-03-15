@@ -29,3 +29,15 @@ Dash Elements:
 
 Random: 
     code 0 = finished running with no error
+
+
+Formating Dash DataTable: 
+dash_table.DataTable(
+        df.to_dict('records'), [{"name": i, "id": i} for i in df.columns],
+        style_as_list_view = False,
+        style_cell={
+            'backgroundColor': colors['background'],
+            'color': colors['text'],
+            'border': '1px solid pink' 
+            }
+        ) 
