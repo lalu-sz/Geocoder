@@ -59,26 +59,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 
     html.Div(id='Uploaded Data',
             children= html.Div(['View Uploaded Data'])
-    ), # end of section 
-
-    html.Div(
-    dcc.Download(id='download-data'
-                  children=html.Div([
-            'Drag and Drop or ',
-            html.A('Select Files')
-            ]),
-        style={
-            'width': '100%',
-            'height': '60px',
-            'lineHeight': '60px',
-            'borderWidth': '1px',
-            'borderStyle': 'dashed',
-            'borderRadius': '5px',
-            'textAlign': 'center',
-            'margin': '10px',
-            'color': colors['text']
-            })    
-    ) # end of section   
+    ), # end of section      
 ]) # end of app layout
 
 '''Function for displaying uploaded user csv data'''
@@ -122,12 +103,10 @@ def parse_contents(contents, filename, date):
         })
     ])
 
-
 @app.callback(Output('Uploaded Data', 'children'),
     Input('upload-data', 'contents'),
     State('upload-data', 'filename'),
     State('upload-data', 'last_modified'))
-
 
 def update_output(list_of_contents, list_of_names, list_of_dates):
     if list_of_contents is not None: 
@@ -136,8 +115,6 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
             zip(list_of_contents,list_of_names,list_of_dates)]
         return children
 
-def func(n_clicks):
-    return dcc.send_data_frame(df.to_csv, "GeoGrill.csv") #would be cool to add datetime formating to output file name
 
 if __name__ == '__main__':
     app.run_server(debug=True)
